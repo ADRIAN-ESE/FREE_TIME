@@ -1,0 +1,41 @@
+{
+    "001": {
+        "name": "books",
+        "quantity": 1200,
+        "price": 120.0
+    },
+    "002": {
+        "name": "Wool",
+        "quantity": 5000,
+        "price": 65.99
+    },
+    "003": {
+        "name": "XL-Shirts",
+        "quantity": 2000,
+        "price": 100.0
+    },
+    "burger": {
+        "quantity": 28,
+        "price": 13.0
+    },
+    "pizza": {
+        "quantity": 20,
+        "price": 20.99
+    },
+    "fries": {
+        "quantity": 25,
+        "price": 11.25
+    },
+    "soda": {
+        "quantity": 34,
+        "price": 5.5
+    },
+    "chicken": {
+        "quantity": 35,
+        "price": 11.75
+    },
+    "steak": {
+        "quantity": 25,
+        "price": 50.0
+    }
+}
