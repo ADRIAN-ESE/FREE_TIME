@@ -1,0 +1,179 @@
+import json
+import os
+
+class InventoryManager:
+    """
+    A simple inventory management system.
+    """
+
+    def __init__(self, filename="inventory.json"):
+        self.filename = filename
+        self.inventory = self.load_inventory()
+
+    def load_inventory(self):
+        """
+        Loads inventory from the trash file.
+        """
+        if os.path.exists(self.filename):
+            with open(self.filename, "r") as f:
+                try:
+                    return json.load(f)
+                except json.JSONDecodeError:
+                    return {}  # Return empty dict if trash is invalid
+        else:
+            return {}
+
+    def save_inventory(self):
+        """
+        Saves inventory to the trash file.
+        """
+        with open(self.filename, "w") as f:
+            json.dump(self.inventory, f, indent=4)
+
+    def add_item(self, item_id, name, quantity, price):
+        """
+        Adds a new item to the inventory.
+        """
+        if item_id in self.inventory:
+            print(f"Item ID {item_id} already exists.")
+            return
+
+        self.inventory[item_id] = {
+            "name": name,
+            "quantity": quantity,
+            "price": price,
+        }
+        self.save_inventory()
+        print(f"Item {name} added successfully.")
+
+    def update_item(self, item_id, name=None, quantity=None, price=None):
+        """
+        Updates an existing item's details.
+        """
+        if item_id not in self.inventory:
+            print(f"Item ID {item_id} not found.")
+            return
+
+        item = self.inventory[item_id]
+
+        if name:
+            item["name"] = name
+        if quantity is not None: #Allow quantity to be 0.
+            item["quantity"] = quantity
+        if price is not None: #Allow Price to be 0.
+            item["price"] = price
+
+        self.save_inventory()
+        print(f"Item {item_id} updated successfully.")
+
+    def delete_item(self, item_id):
+        """
+        Deletes an item from the inventory.
+        """
+        if item_id not in self.inventory:
+            print(f"Item ID {item_id} not found.")
+            return
+
+        del self.inventory[item_id]
+        self.save_inventory()
+        print(f"Item {item_id} deleted successfully.")
+
+    def view_item(self, item_id):
+        """
+        Views the details of a specific item.
+        """
+        if item_id not in self.inventory:
+            print(f"Item ID {item_id} not found.")
+            return
+
+        item = self.inventory[item_id]
+        print(f"Item ID: {item_id}")
+        print(f"Name: {item['name']}")
+        print(f"Quantity: {item['quantity']}")
+        print(f"Price: ${item['price']}")
+
+    def view_all_items(self):
+        """
+        Views all items in the inventory.
+        """
+        if not self.inventory:
+            print("Inventory is empty.")
+            return
+
+        print("Inventory:")
+        for item_id, item in self.inventory.items():
+            print(f"Item ID: {item_id}, Name: {item['name']}, Quantity: {item['quantity']}, Price: ${item['price']}")
+
+    def search_items(self, search_term):
+        """
+        Searches items by name.
+        """
+        found_items = []
+        for item_id, item in self.inventory.items():
+            if search_term.lower() in item["name"].lower():
+                found_items.append((item_id, item))
+
+        if not found_items:
+            print(f"No items found matching '{search_term}'.")
+            return
+
+        print(f"Search results for '{search_term}':")
+        for item_id, item in found_items:
+            print(f"Item ID: {item_id}, Name: {item['name']}, Quantity: {item['quantity']}, Price: ${item['price']}")
+
+def main():
+    inventory_manager = InventoryManager()
+
+    while True:
+        print("\nInventory Management System")
+        print("1. Add Item")
+        print("2. Update Item")
+        print("3. Delete Item")
+        print("4. View Item")
+        print("5. View All Items")
+        print("6. Search Items")
+        print("7. Exit")
+
+        choice = input("Enter your choice: ")
+
+        if choice == "1":
+            item_id = input("Enter item ID: ")
+            name = input("Enter item name: ")
+            quantity = int(input("Enter quantity: "))
+            price = float(input("Enter price: "))
+            inventory_manager.add_item(item_id, name, quantity, price)
+
+        elif choice == "2":
+            item_id = input("Enter item ID to update: ")
+            name = input("Enter new name (leave blank to keep current): ")
+            quantity_str = input("Enter new quantity (leave blank to keep current): ")
+            price_str = input("Enter new price (leave blank to keep current): ")
+
+            quantity = int(quantity_str) if quantity_str else None
+            price = float(price_str) if price_str else None
+
+            inventory_manager.update_item(item_id, name, quantity, price)
+
+        elif choice == "3":
+            item_id = input("Enter item ID to delete: ")
+            inventory_manager.delete_item(item_id)
+
+        elif choice == "4":
+            item_id = input("Enter item ID to view: ")
+            inventory_manager.view_item(item_id)
+
+        elif choice == "5":
+            inventory_manager.view_all_items()
+
+        elif choice == "6":
+            search_term = input("Enter search term: ")
+            inventory_manager.search_items(search_term)
+
+        elif choice == "7":
+            break
+
+        else:
+            print("Invalid choice. Please try again.")
+
+if __name__ == "__main__":
+    main()
