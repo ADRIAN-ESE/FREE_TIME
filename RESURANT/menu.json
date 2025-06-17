@@ -1,0 +1,30 @@
+{
+    "pizza": {
+        "quantity": 20,
+        "price": 20.99
+    },
+    "burger": {
+        "quantity": 46,
+        "price": 12.5
+    },
+    "fries": {
+        "quantity": 55,
+        "price": 11.25
+    },
+    "soda": {
+        "quantity": 192,
+        "price": 5.5
+    },
+    "chicken wings": {
+        "quantity": 55,
+        "price": 11.75
+    },
+    "steak": {
+        "quantity": 50,
+        "price": 50.25
+    },
+    "HOT DOGS": {
+        "quantity": 40,
+        "price": 25.0
+    }
+}

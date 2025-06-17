@@ -1,0 +1,26 @@
+[
+    {
+        "book_id": "a7404cb0-3921-4ac8-ac6e-6f9977dc98e6",
+        "title": "Tales Of The Sword King",
+        "author": "J.K Rolling",
+        "genre": "Fantasy",
+        "price": 11.25,
+        "stock": 198
+    },
+    {
+        "book_id": "3b361436-320d-43db-9126-dd0edc961b3a",
+        "title": "HOW TO GET AWAY WITH MURDER",
+        "author": "LIALI ANDY",
+        "genre": "MYSTERY",
+        "price": 10.0,
+        "stock": 150
+    },
+    {
+        "book_id": "35240b44-dd50-4f0c-92f2-8f70bfaa0d59",
+        "title": "RED RISING",
+        "author": "DAN BROWN",
+        "genre": "SIFI, ACTION",
+        "price": 50.25,
+        "stock": 1000
+    }
+]
